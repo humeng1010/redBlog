@@ -5,26 +5,59 @@
         <div class="row">
           <!-- 文章列表 -->
           <div class="col-xl-8">
+            <!-- 使用v-for遍历article -->
             <article class="blog-arc">
               <div class="arc-header">
+                <!-- 标题 -->
                 <h2 class="arc-title">
-                  <a href="post.html"
-                    >蔚来汽车宣布将在今日20点召开第二季度财报业绩电话会</a
+                  <router-link
+                    :to="{
+                      name: 'blog',
+                      params: {
+                        id: 1,
+                      },
+                    }"
                   >
+                    <span
+                      >蔚来汽车宣布将在今日20点召开第二季度财报业绩电话会</span
+                    >
+                  </router-link>
+
+                  <!-- <a href="post.html"
+                    >蔚来汽车宣布将在今日20点召开第二季度财报业绩电话会</a
+                  > -->
                 </h2>
+                <!-- 标签 -->
                 <ul class="arc-meta">
                   <li><i class="mdi mdi-calendar"></i> 2019-09-25 09:21</li>
                   <li>
                     <i class="mdi mdi-tag-text-outline"></i>
-                    <a href="#">蔚来汽车</a>, <a href="#">财报</a>
+                    <i href="#">蔚来汽车</i>, <i href="#">财报</i>
                   </li>
                   <li>
                     <i class="mdi mdi-comment-multiple-outline"></i>
-                    <a href="#">3 评论</a>
+                    <i href="#"> 3 评论</i>
                   </li>
                 </ul>
               </div>
-
+              <!-- 封面 -->
+              <div class="arc-preview" @click="viewBlog">
+                <!-- <router-link
+                  :to="{
+                    name: 'blog',
+                    params: {
+                      id: 1,
+                    },
+                  }"
+                > -->
+                <img
+                  src="../../images/blog/post-1.png"
+                  alt=""
+                  class="img-fluid rounded"
+                />
+                <!-- </router-link> -->
+              </div>
+              <!-- 简介 -->
               <div class="arc-synopsis">
                 <p>
                   今日，蔚来宣布将在北京时间周三20:
@@ -261,7 +294,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      blog: {
+        id: 1,
+      },
+    };
+  },
+  methods: {
+    // 编程式路由跳转
+    viewBlog() {
+      this.$router.push({ path: `/blog/${this.blog.id}` });
+    },
+  },
+};
 </script>
 
 <style>
@@ -286,6 +333,11 @@ export default {};
 .arc-title {
   font-size: 24px;
   margin: 0 0 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.arc-title:hover {
+  color: #007bff;
 }
 
 .arc-meta {

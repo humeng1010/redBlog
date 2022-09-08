@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import Home from '../pages/Home';
 import Blog from '../pages/Blog';
 import About from '../pages/About';
+import Skill from '../pages/Skill';
 
 // 使用插件
 Vue.use(VueRouter)
@@ -40,13 +41,16 @@ export default new VueRouter({
         {
             path: "/home",
             component: Home,
-            children: [
-                {
-                    path: "/blog/:id",
-                    component: Blog,
 
-                }
-            ]
+        },
+        {
+            name: "blog",
+            path: "/blog/:id",
+            component: Blog,
+        },
+        {
+            path: "/skill",
+            component: Skill
         },
         {
             path: "/about",

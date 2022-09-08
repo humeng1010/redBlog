@@ -7,8 +7,9 @@
           <div class="col-12">
             <article class="blog-arc">
               <div class="blog-arc-detail">
-                <h5 class="text-center mt-0 mb-3 pb-3">关于我</h5>
-                <p>博客</p>
+                <h5 class="text-center mt-0 mb-3 pb-3">技术</h5>
+                <p>java</p>
+                <p>spring</p>
                 <p>xit</p>
                 <h6><strong>特别鸣谢</strong></h6>
                 <ul>
@@ -32,5 +33,5 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 </style>

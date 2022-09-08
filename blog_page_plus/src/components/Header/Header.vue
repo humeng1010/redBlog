@@ -1,9 +1,10 @@
 <template>
+  <!-- header标签css中含有背景动态修改 -->
   <header class="blog-header text-center">
     <div class="blog-header-container">
       <div class="blog-mask"></div>
       <h1 class="blog-blogger pt-lg-4 mb-0">
-        <a href="index.html">redyouzi的博客</a>
+        <router-link to="/home">redyouzi的博客</router-link>
       </h1>
       <nav class="navbar navbar-expand-lg">
         <a
@@ -21,14 +22,17 @@
 
         <div id="navigation" class="collapse navbar-collapse flex-column">
           <div class="profile-section pt-3 pt-lg-0">
-            <!-- 背景图片 -->
-            <img
-              class="profile-image mb-3 rounded-circle mx-auto"
-              src="../../images/avatar.png"
-              width="120"
-              height="120"
-              alt="笔下光年"
-            />
+            <!-- 头像 -->
+            <router-link to="/home">
+              <img
+                class="profile-image mb-3 rounded-circle mx-auto"
+                src="../../images/avatar.png"
+                width="120"
+                height="120"
+                alt="redyouzi"
+              />
+            </router-link>
+
             <!-- 个性签名 -->
             <div class="blog-sentence mb-3">
               必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。
@@ -39,16 +43,18 @@
           <!-- 切换页面 -->
           <ul class="navbar-nav flex-column text-center">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">首页</a>
+              <router-link class="nav-link" to="/home">首页</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">技术</a>
+              <router-link class="nav-link" to="/skill">技术</router-link>
+              <!-- <a class="nav-link" href="index.html">技术</a> -->
             </li>
+            <!-- 
             <li class="nav-item">
               <a class="nav-link" href="index.html">感悟</a>
-            </li>
+            </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="about.html">关于我</a>
+              <router-link class="nav-link" to="/about">关于我</router-link>
             </li>
           </ul>
 
@@ -73,7 +79,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      user: {
+        avatar: "../../images/left-bg.jpg",
+      },
+    };
+  },
+};
 </script>
 
 <style>

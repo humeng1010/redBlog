@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
   <link rel="stylesheet" type="text/css" href="css/style.min.css" />
+  <link rel="stylesheet" href="./js/highlight/styles/default.css">
   <title>
     <%= htmlWebpackPlugin.options.title %>
   </title>
@@ -25,6 +26,10 @@
   <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/main.min.js"></script>
+  <!-- 引入code块高亮显示 -->
+  <script type="text/javascript" src="./js/highlight/highlight.pack.js"></script>
+  <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
 </body>
 
 </html>
