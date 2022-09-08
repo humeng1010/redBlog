@@ -40,28 +40,38 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 // 配置路由
 export default new VueRouter({
     routes: [
+        // 博客列表
+        {
+            path: '/blogList',
+            component: blogList,
+            meta: { show: true },
+            children: [
+                // 博客
+                {
+                    path: '/:id',
+                    component: blog,
+                    meta: { show: true },
+                },
+            ]
+        },
+        // 主页
         {
             path: "/home",
             component: blogHome,
             meta: { show: true }
         },
+
+
+
+        // --------------------------后台管理------------------
+        //后台登陆页面
         {
             path: "/login",
             component: loginBlog,
             meta: { show: false }
         },
-        {
-            path: '/blogList',
-            component: blogList,
-            meta: { show: true },
-        },
 
-
-        {
-            path: '/blog',
-            component: blog,
-            meta: { show: true },
-        },
+        // 编辑
         {
             path: '/edit',
             component: blogEdit,

@@ -3,7 +3,7 @@
     <div class="welcome">欢迎访问redyouzi的博客</div>
     <div class="nav">
       <div class="blog">
-        <router-link to="/blog"> 博客 </router-link>
+        <router-link to="/blogList"> 博客 </router-link>
       </div>
       <div class="photos">
         <router-link to="/home"> 随记 </router-link>
