@@ -161,7 +161,7 @@ export default {
     // 派发action：通过Vuex发起ajax请求，将数据存储到store中
     // this.$store.dispatch("blogPage/getBlogList");
     // 调用映射的action方法
-    // this.getBlogList();
+    this.getBlogList();
   },
   methods: {
     // 使用mapActions映射获取到$store中actions中的方法

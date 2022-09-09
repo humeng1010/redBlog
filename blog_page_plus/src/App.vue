@@ -1,31 +1,25 @@
 <template>
   <div>
     <Header></Header>
-    <router-view></router-view>
+    <transition
+      name="animate__animated animate__bounce"
+      enter-active-class="animate__pulse"
+      leave-active-class="animate__pulse"
+    >
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import "animate.css";
 import Header from "./components/Header/Header.vue";
 export default {
   name: "App",
   components: {
     Header,
-  },
-  computed: {
-    ...mapState("blogPage", ["blogList"]),
-  },
-  mounted() {
-    // 派发action：通过Vuex发起ajax请求，将数据存储到store中
-    // this.$store.dispatch("blogPage/getBlogList");
-    // 调用映射的action方法
-    this.getBlogList();
-  },
-  methods: {
-    // 使用mapActions映射获取到$store中actions中的方法
-    ...mapActions("blogPage", ["getBlogList"]),
-    // 编程式路由跳转
   },
 };
 </script>

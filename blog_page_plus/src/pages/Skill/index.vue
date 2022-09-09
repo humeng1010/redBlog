@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-wrapper">
+  <div class="blog-wrapper skill">
     <section class="mt-5 pb-5">
       <div class="container">
         <div class="row">
@@ -34,4 +34,7 @@ export default {};
 </script>
 
 <style scoped>
+.skill {
+  height: 1000px;
+}
 </style>

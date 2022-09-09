@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 // 导入vue-router
 import router from '@/router';
+// router.afterEach((to, from, next) => {
+//   window.scrollTo(0, 0);
+// });
 // 引入Markdown语法
 import showdown from 'showdown';
 // 引入vuex仓库

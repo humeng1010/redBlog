@@ -37,6 +37,15 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 
 // 配置路由
 export default new VueRouter({
+    scrollBehavior(to, from, savedPosition) {
+        // return { x: 0, y: 0, behavior: 'smooth' }
+        // 如果通过浏览器的前进后退键那么还会回到原先的位置，不会回到顶部
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { x: 0, y: 0, behavior: 'smooth' }
+        }
+    },
     routes: [
         {
             path: "/home",

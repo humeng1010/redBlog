@@ -9,7 +9,7 @@
               <div class="arc-header">
                 <!-- 标题 -->
                 <h1 class="arc-title">
-                  平头哥发布含光 800：高性能 AI 推理芯片
+                  {{ blog.blogTitle }}
                 </h1>
                 <!-- 标签 -->
                 <ul class="arc-meta">
@@ -114,25 +114,29 @@
 // 引入代码高亮
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
+      theBlog: {},
       container: "",
     };
   },
   computed: {
-    ...mapState("blogPage", ["blogList"]),
+    ...mapState("blogPage", ["blog"]),
   },
   mounted() {
+    //根据id获取博客
+    this.getBlogWithId(this.$route.params.id);
     // 显示Markdown到页面上
-    setTimeout(() => {
-      this.showContainer();
-    }, 0);
+    this.showContainer();
     // 加载代码高亮显示
     hljs.highlightAll();
   },
+
   methods: {
+    // 根据路由传递的参数查询博客数据
+    ...mapActions("blogPage", ["getBlogWithId"]),
     // 把博客内容加载到页面上
     showContainer() {
       let count = 0;
@@ -144,10 +148,8 @@ export default {
           clearInterval(interval);
           console.log("已停止");
         }
-        if (this.blogList) {
-          this.container = this.$showdown.makeHtml(
-            this.blogList[0].blogContent
-          );
+        if (this.blog) {
+          this.container = this.$showdown.makeHtml(this.blog.blogContent);
           console.log("页面已渲染");
           clearInterval(interval);
         }

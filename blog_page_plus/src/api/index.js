@@ -5,6 +5,13 @@ import pageRequestBase from './pageRequestBase';
 
 /**
  * 获取博客列表
+ * @returns 对象数组
  */
-// export const getAllBolg = () => { return pageRequestBase.get("/blogs") }
-export const getAllBolg = () => pageRequestBase.get("/blogs") 
+export const getAllBolg = () => pageRequestBase.get("/blogs")
+
+/**
+ * 
+ * @param {*} blogId 
+ * @returns 对象
+ */
+export const getBlogById = (blogId) => pageRequestBase({ method: "GET", url: `/blogs/${blogId}` })

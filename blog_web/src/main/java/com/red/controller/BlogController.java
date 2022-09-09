@@ -5,6 +5,7 @@ import com.red.service.BlogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +22,12 @@ public class BlogController {
 
     @GetMapping
     public Result getBlogList(HttpServletRequest request) {
-        String authorization = request.getHeader("authorization");
-        log.info("token{}", authorization);
-//        log.info("查询所有博客{}", blogService.list());
         return Result.ok(blogService.list());
+    }
+
+    @GetMapping("/{blogId}")
+    public Result getBlogById(@PathVariable("blogId") Long blogId) {
+        return Result.ok(blogService.getById(blogId));
     }
 
 }
