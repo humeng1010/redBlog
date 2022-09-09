@@ -6,6 +6,15 @@ import router from '@/router';
 import showdown from 'showdown';
 // 引入vuex仓库
 import store from './store';
+// 引入图片懒加载插件
+import VueLazyLoad from 'vue-lazyload';
+//配置懒加载属性
+Vue.use(VueLazyLoad, {
+  preLoad: 1,
+  error: require('./assets/logo.png'),
+  // loading: require('./assets/img/homePage_top.jpg'),
+  attempt: 2,
+})
 
 // 关闭生产提示
 Vue.config.productionTip = false
