@@ -1,5 +1,6 @@
 <template>
   <div class="blog-wrapper">
+    {{ blogList }}
     <section class="mt-5 pb-5">
       <div class="container">
         <div class="row">
@@ -294,6 +295,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -302,7 +305,18 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState("blogPage", ["blogList"]),
+  },
+  mounted() {
+    // 派发action：通过Vuex发起ajax请求，将数据存储到store中
+    // this.$store.dispatch("blogPage/getBlogList");
+    // 调用映射的action方法
+    this.getBlogList();
+  },
   methods: {
+    // 使用mapActions映射获取到$store中actions中的方法
+    ...mapActions("blogPage", ["getBlogList"]),
     // 编程式路由跳转
     viewBlog() {
       this.$router.push({ path: `/blog/${this.blog.id}` });
