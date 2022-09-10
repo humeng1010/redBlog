@@ -148,11 +148,7 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
-    return {
-      blog: {
-        id: 1,
-      },
-    };
+    return {};
   },
   computed: {
     ...mapState("blogPage", ["blogList"]),
