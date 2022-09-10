@@ -4,8 +4,9 @@
     <div class="blog-header-container">
       <div class="blog-mask"></div>
       <h1 class="blog-blogger pt-lg-4 mb-0">
-        <router-link to="/home">redyouzi的博客</router-link>
+        <router-link to="/home">{{ user.userNickname }} 的博客</router-link>
       </h1>
+      <!-- 小屏幕时候的下拉单 -->
       <nav class="navbar navbar-expand-lg">
         <a
           class="navbar-toggler"
@@ -26,7 +27,7 @@
             <router-link to="/home">
               <img
                 class="profile-image mb-3 rounded-circle mx-auto"
-                src="../../images/avatar.png"
+                :src="user.userAvatar"
                 width="120"
                 height="120"
                 alt="redyouzi"
@@ -35,7 +36,7 @@
 
             <!-- 个性签名 -->
             <div class="blog-sentence mb-3">
-              必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。
+              {{ user.userSignature }}
             </div>
             <hr />
           </div>
@@ -79,13 +80,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
-    return {
-      user: {
-        avatar: "../../images/left-bg.jpg",
-      },
-    };
+    return {};
+  },
+  computed: {
+    ...mapState("blogPage", ["user"]),
+  },
+  mounted() {
+    this.getUserById();
+  },
+  methods: {
+    ...mapActions("blogPage", ["getUserById"]),
   },
 };
 </script>

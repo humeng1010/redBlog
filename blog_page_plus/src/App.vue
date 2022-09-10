@@ -6,9 +6,7 @@
       enter-active-class="animate__pulse"
       leave-active-class="animate__pulse"
     >
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </transition>
   </div>
 </template>

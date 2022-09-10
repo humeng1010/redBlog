@@ -17,6 +17,8 @@ mybatis-plus:
       table-prefix: tb_
 
 
+user:
+  user-id: 8888888888888888888
 
 
 

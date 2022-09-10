@@ -44,12 +44,12 @@
                 </ul>
               </div>
               <!-- 封面 -->
-              <div class="arc-preview" @click="viewBlog">
+              <div class="arc-preview" @click="viewBlog(blog.blogId)">
                 <img v-lazy="blog.blogCover" alt="" class="img-fluid rounded" />
               </div>
               <!-- 简介 -->
               <div class="arc-synopsis">
-                <!-- 显示内容的前五个字 -->
+                <!-- 显示内容的前十个字 -->
                 <p>{{ blog.blogContent.substring(0, 10) }} ...</p>
               </div>
             </article>
@@ -167,8 +167,8 @@ export default {
     // 使用mapActions映射获取到$store中actions中的方法
     ...mapActions("blogPage", ["getBlogList"]),
     // 编程式路由跳转
-    viewBlog() {
-      this.$router.push({ path: `/blog/${this.blog.id}` });
+    viewBlog(blogId) {
+      this.$router.push({ path: `/blog/${blogId}` });
     },
   },
 };

@@ -1,6 +1,16 @@
-import { getAllBolg, getBlogById } from '@/api';
+import { getAllBolg, getBlogById, getUser } from '@/api';
 // home模块数据仓库
 const actions = {
+
+    async getUserById({ commit }, userId) {
+        const res = await getUser(userId);
+        console.log(res);
+        if (res.data.success) {
+            commit('GETUSERBYID', res.data.data)
+        } else {
+            return new Promise.reject(res)
+        }
+    },
     // 通过API里面的接口函数调用，向服务器发送请求，获取服务器的数据
     async getBlogList({ commit }) {
         const res = await getAllBolg();
@@ -22,7 +32,9 @@ const actions = {
 
 }
 const mutations = {
-    // 修改商品列表
+    GETUSERBYID(state, user) {
+        state.user = user;
+    },
     GETBLOGLIST(state, blogList) {
         state.blogList = blogList
     },
@@ -31,6 +43,7 @@ const mutations = {
     }
 }
 const state = {
+    user: {},
     blogList: [],
     blog: {}
 

@@ -13,26 +13,31 @@
                 </h1>
                 <!-- 标签 -->
                 <ul class="arc-meta">
-                  <li><i class="mdi mdi-calendar"></i> 2019-09-25 09:21</li>
                   <li>
-                    <i class="mdi mdi-tag-text-outline"></i> <a href="#">AI</a>,
-                    <a href="#">芯片</a>
+                    <i class="mdi mdi-calendar"></i> 创建时间:
+                    {{ blog.createTime }}
+                  </li>
+                  <li>
+                    <i class="mdi mdi-tag-text-outline"></i>
+                    <i href="#">计算机</i>,
+                    <i href="#">技术</i>
                   </li>
                   <li>
                     <i class="mdi mdi-comment-multiple-outline"></i>
-                    <a href="#">3 评论</a>
+                    <a href="#">{{ blog.blogViews }} 浏览</a>
                   </li>
                 </ul>
               </div>
               <!-- 封面图片 -->
               <div class="arc-preview">
-                <img
-                  src="../../images/blog/post-1.png"
-                  alt=""
-                  class="img-fluid rounded"
-                />
+                <img :src="blog.blogCover" alt="" class="img-fluid rounded" />
               </div>
 
+              <!-- <pre>
+                <code class="java">
+                  {{blog.blogContent}}
+                </code>
+              </pre> -->
               <!-- 正文内容支持Markdown语法 -->
               <div v-html="container"></div>
 
@@ -126,12 +131,13 @@ export default {
     ...mapState("blogPage", ["blog"]),
   },
   mounted() {
-    //根据id获取博客
-    this.getBlogWithId(this.$route.params.id);
-    // 显示Markdown到页面上
-    this.showContainer();
     // 加载代码高亮显示
     hljs.highlightAll();
+    //根据id获取博客
+    this.getBlogWithId(this.$route.params.id);
+
+    // 显示Markdown到页面上
+    this.showContainer();
   },
 
   methods: {
@@ -148,7 +154,7 @@ export default {
           clearInterval(interval);
           console.log("已停止");
         }
-        if (this.blog) {
+        if (this.blog.blogContent) {
           this.container = this.$showdown.makeHtml(this.blog.blogContent);
           console.log("页面已渲染");
           clearInterval(interval);
