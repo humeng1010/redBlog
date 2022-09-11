@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest
 class BlogWebApplicationTests {
-    @Value("${user.id}")
+    @Value("${user.user-id}")
     private Long userId;
     @Autowired
     private BlogMapper blogMapper;

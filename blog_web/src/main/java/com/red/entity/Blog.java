@@ -17,6 +17,7 @@ public class Blog {
     private Long userId;
     private String blogCover;
     private String blogTitle;
+    private String blogDescription;
     private String blogContent;
     private Long blogViews;
     private Long blogLikeCount;

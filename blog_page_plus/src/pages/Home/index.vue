@@ -13,7 +13,7 @@
             >
               <div class="arc-header">
                 <!-- 标题 -->
-                <h2 class="arc-title">
+                <h2 class="arc-title" @click="addViews(blog)">
                   <router-link
                     :to="{
                       name: 'blog',
@@ -30,12 +30,14 @@
                   <li>
                     <i class="mdi mdi-calendar"></i>
                     <!-- 更新时间 -->
-                    {{ blog.updateTime }}
+                    创建时间:
+                    {{ blog.createTime }}
                   </li>
                   <li>
                     <i class="mdi mdi-tag-text-outline"></i>
                     <!-- 博客标签 -->
-                    <i>{{}}</i>, <i>财报</i>
+                    <i>{{ blog.blogLikeCount }} 点赞</i>,
+                    <i>{{ blog.blogTitle }}</i>
                   </li>
                   <li>
                     <i class="mdi mdi-comment-multiple-outline"></i>
@@ -44,13 +46,22 @@
                 </ul>
               </div>
               <!-- 封面 -->
-              <div class="arc-preview" @click="viewBlog(blog.blogId)">
+              <div
+                class="arc-preview"
+                @click="
+                  viewBlog(blog.blogId);
+                  addViews(blog);
+                "
+              >
                 <img v-lazy="blog.blogCover" alt="" class="img-fluid rounded" />
               </div>
               <!-- 简介 -->
               <div class="arc-synopsis">
                 <!-- 显示内容的前十个字 -->
-                <p>{{ blog.blogContent.substring(0, 10) }} ...</p>
+                <p>
+                  {{ blog.blogDescription }}
+                  ...
+                </p>
               </div>
             </article>
 
@@ -110,17 +121,6 @@
                 </ul>
               </aside>
 
-              <!-- 归档 -->
-              <aside class="widget">
-                <div class="widget-title">归档</div>
-                <ul>
-                  <li><a href="#">2019 三月</a> (40)</li>
-                  <li><a href="#">2019 四月</a> (08)</li>
-                  <li><a href="#">2019 五月</a> (11)</li>
-                  <li><a href="#">2019 六月</a> (21)</li>
-                </ul>
-              </aside>
-
               <!-- 标签 -->
               <aside class="widget widget-tag-cloud">
                 <div class="widget-title">标签</div>
@@ -157,14 +157,21 @@ export default {
     // 派发action：通过Vuex发起ajax请求，将数据存储到store中
     // this.$store.dispatch("blogPage/getBlogList");
     // 调用映射的action方法
-    this.getBlogList();
+    try {
+      this.getBlogList();
+    } catch (error) {
+      console.log("服务错误");
+    }
   },
   methods: {
     // 使用mapActions映射获取到$store中actions中的方法
-    ...mapActions("blogPage", ["getBlogList"]),
+    ...mapActions("blogPage", ["getBlogList", "addBlogViews"]),
     // 编程式路由跳转
     viewBlog(blogId) {
       this.$router.push({ path: `/blog/${blogId}` });
+    },
+    addViews(blog) {
+      this.addBlogViews(blog);
     },
   },
 };

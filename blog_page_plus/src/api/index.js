@@ -22,3 +22,5 @@ export const getBlogById = (blogId) => pageRequestBase({ method: "GET", url: `/b
  * @returns 
  */
 export const getUser = (userId = "8888888888888888888") => pageRequestBase.get(`/user/${userId}`)
+
+export const addViews = (blog) => pageRequestBase({ method: "PUT", url: "/blogs/addViews", data: blog })

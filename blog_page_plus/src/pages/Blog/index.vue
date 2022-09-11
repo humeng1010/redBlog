@@ -19,12 +19,12 @@
                   </li>
                   <li>
                     <i class="mdi mdi-tag-text-outline"></i>
-                    <i href="#">计算机</i>,
-                    <i href="#">技术</i>
+                    <i href="#">{{ blog.blogLikeCount }} 点赞</i>,
+                    <i href="#">{{ blog.blogTitle }}</i>
                   </li>
                   <li>
                     <i class="mdi mdi-comment-multiple-outline"></i>
-                    <a href="#">{{ blog.blogViews }} 浏览</a>
+                    <i href="#"> {{ blog.blogViews }} 浏览</i>
                   </li>
                 </ul>
               </div>
@@ -82,27 +82,16 @@
                 </ul>
               </aside>
 
-              <!-- 归档 -->
-              <aside class="widget">
-                <div class="widget-title">归档</div>
-                <ul>
-                  <li><a href="#">2019 三月</a> (40)</li>
-                  <li><a href="#">2019 四月</a> (08)</li>
-                  <li><a href="#">2019 五月</a> (11)</li>
-                  <li><a href="#">2019 六月</a> (21)</li>
-                </ul>
-              </aside>
-
               <!-- 标签 -->
               <aside class="widget widget-tag-cloud">
                 <div class="widget-title">标签</div>
                 <div class="tag-cloud">
-                  <a href="#" class="badge badge-light">php</a>
-                  <a href="#" class="badge badge-primary">苹果</a>
-                  <a href="#" class="badge badge-danger">比特币</a>
-                  <a href="#" class="badge badge-light">linux</a>
-                  <a href="#" class="badge badge-light">前端</a>
-                  <a href="#" class="badge badge-light">vue</a>
+                  <a href="#" class="badge badge-default">vue</a>
+                  <a href="#" class="badge badge-primary">ios</a>
+                  <a href="#" class="badge badge-success">java</a>
+                  <a href="#" class="badge badge-info">linux</a>
+                  <a href="#" class="badge badge-warning">macos</a>
+                  <a href="#" class="badge badge-danger">springboot</a>
                 </div>
               </aside>
             </div>

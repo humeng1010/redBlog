@@ -13,10 +13,10 @@ import store from './store';
 import VueLazyLoad from 'vue-lazyload';
 //配置懒加载属性
 Vue.use(VueLazyLoad, {
-  preLoad: 1,
-  error: require('./assets/logo.png'),
-  // loading: require('./assets/img/homePage_top.jpg'),
-  attempt: 2,
+  preLoad: 1.3,
+  error: require('./assets/logo.png'),//加载失败图片
+  loading: require('./images/blog/post-2.jpg'),//加载图片
+  attempt: 2,//尝试加载次数
 })
 
 // 关闭生产提示
