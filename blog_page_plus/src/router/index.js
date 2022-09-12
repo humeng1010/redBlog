@@ -65,26 +65,6 @@ export default new VueRouter({
             path: "/about",
             component: About
         },
-        // {
-        //     // 指定params参数可传可不传加上一个问号'?'
-        //     name: "search",
-        //     path: "/search/:keyword?",
-        //     component: Search,
-        //     meta: { show: true },
-        //     // 路由组件能不能传递props数据？
-        //     // 能，而且有三种形式
-        //     // 形式一：值为对象 传递的参数固定，灵活性差
-        //     // props: { a: 999 }
-        //     // 形式二：(接收不了query)，值为布尔值，如果为true，则会将该路由收到的params参数，以props的形式传给search路由页面
-        //     // props: true
-        //     // 形式三：函数写法
-        //     props($route) {
-        //         return {
-        //             keyword: $route.params.keyword,
-        //         }
-        //     }
-        // },
-
         {
             path: '*',
             redirect: "/home"
