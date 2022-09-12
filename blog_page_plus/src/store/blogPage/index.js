@@ -35,11 +35,16 @@ const actions = {
     },
 
     async addBlogViews({ commit }, blog) {
-        const res = await addViews(blog);
-        console.log(res);
-        if (res.data.success) {
-            commit("ADDBLOGVIEWS", res.data.data)
+        try {
+            const res = await addViews(blog);
+            console.log(res);
+            if (res.data.success) {
+                commit("ADDBLOGVIEWS", res.data.data)
+            }
+        } catch (error) {
+            console.log(error);
         }
+
 
     }
 

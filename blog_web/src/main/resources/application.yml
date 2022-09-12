@@ -15,6 +15,7 @@ mybatis-plus:
   global-config:
     db-config:
       table-prefix: tb_
+  type-aliases-package: "com.red.entity"
 
 
 user:

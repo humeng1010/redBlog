@@ -40,7 +40,7 @@ public class BlogController {
 
     @PutMapping("/addViews")
     public Result updateBlogViews(@RequestBody Blog blog) {
-        log.info("传递的参数{}", blog);
+//        log.info("传递的参数{}", blog);
         Long blogViews = blog.getBlogViews();
         blog.setBlogViews(blogViews + 1);
 

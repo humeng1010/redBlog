@@ -13,8 +13,9 @@
             >
               <div class="arc-header">
                 <!-- 标题 -->
-                <h2 class="arc-title" @click="addViews(blog)">
+                <h2 class="arc-title">
                   <router-link
+                    @click="addViews(blog)"
                     :to="{
                       name: 'blog',
                       params: {

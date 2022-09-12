@@ -23,4 +23,9 @@ export const getBlogById = (blogId) => pageRequestBase({ method: "GET", url: `/b
  */
 export const getUser = (userId = "8888888888888888888") => pageRequestBase.get(`/user/${userId}`)
 
+/**
+ * 增加浏览量
+ * @param {object} blog 
+ * @returns 
+ */
 export const addViews = (blog) => pageRequestBase({ method: "PUT", url: "/blogs/addViews", data: blog })
