@@ -26,9 +26,7 @@ public class SkillController {
      * @return
      */
     @PostMapping("/addUserSkill")
-    public Result addUserSkill(UserSkillDTO userSkillDto) {
-//        String skill = userSkillDto.getSkill();
-
+    public Result addUserSkill(@RequestBody UserSkillDTO userSkillDto) {
         return skillService.addUserSkill(userSkillDto);
     }
 
