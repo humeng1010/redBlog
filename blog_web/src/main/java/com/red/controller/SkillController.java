@@ -1,12 +1,10 @@
 package com.red.controller;
 
 import com.red.controller.utils.Result;
+import com.red.dto.UserSkillDTO;
 import com.red.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -18,6 +16,20 @@ public class SkillController {
     @GetMapping("/{userId}")
     public Result getUserSkill(@PathVariable Long userId) {
         return skillService.getUserSkill(userId);
+    }
+
+
+    /**
+     * 添加用户技术
+     *
+     * @param userSkillDto
+     * @return
+     */
+    @PostMapping("/addUserSkill")
+    public Result addUserSkill(UserSkillDTO userSkillDto) {
+//        String skill = userSkillDto.getSkill();
+
+        return skillService.addUserSkill(userSkillDto);
     }
 
 }
