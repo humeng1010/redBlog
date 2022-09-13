@@ -22,8 +22,8 @@ public class SkillController {
     /**
      * 添加用户技术
      *
-     * @param userSkillDto
-     * @return
+     * @param userSkillDto 包含userid和skill
+     * @return Result
      */
     @PostMapping("/addUserSkill")
     public Result addUserSkill(@RequestBody UserSkillDTO userSkillDto) {
