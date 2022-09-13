@@ -29,3 +29,10 @@ export const getUser = (userId = "8888888888888888888") => pageRequestBase.get(`
  * @returns 
  */
 export const addViews = (blog) => pageRequestBase({ method: "PUT", url: "/blogs/addViews", data: blog })
+
+/**
+ * 根基userId获取用户技能
+ * @param {string} userId 
+ * @returns 
+ */
+export const skills = (userId = "8888888888888888888") => pageRequestBase.get(`/skills/${userId}`)

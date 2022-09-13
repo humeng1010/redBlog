@@ -1,4 +1,4 @@
-import { addViews, getAllBolg, getBlogById, getUser } from '@/api';
+import { addViews, getAllBolg, getBlogById, getUser, skills } from '@/api';
 // home模块数据仓库
 const actions = {
 
@@ -44,7 +44,17 @@ const actions = {
         } catch (error) {
             console.log(error);
         }
+    },
 
+    async getUserSkill({ commit }, userId) {
+        try {
+            const res = await skills();
+            if (res.data.success) {
+                commit("GETUSERSKILL", res.data.data)
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 
@@ -61,12 +71,16 @@ const mutations = {
     },
     ADDBLOGVIEWS(state, newBlog) {
         state.blog = newBlog
+    },
+    GETUSERSKILL(state, skills) {
+        state.skills = skills
     }
 }
 const state = {
     user: {},
     blogList: [],
-    blog: {}
+    blog: {},
+    skills: []
 
 }
 const getters = {
