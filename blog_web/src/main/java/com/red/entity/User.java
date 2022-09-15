@@ -19,6 +19,8 @@ public class User {
     @TableId(value = "user_id", type = IdType.ASSIGN_ID)
     private Long userId;
     private String userName;
+    //    不查询用户密码
+    @TableField(select = false)
     private String userPassword;
     private String userEmail;
     private String userAvatar;

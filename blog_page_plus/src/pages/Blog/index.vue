@@ -131,7 +131,7 @@ export default {
 
   methods: {
     // 根据路由传递的参数查询博客数据
-    ...mapActions("blogPage", ["getBlogWithId"]),
+    ...mapActions("blogPage", ["getBlogWithId", "addBlogViews"]),
     // 把博客内容加载到页面上
     showContainer() {
       let count = 0;
@@ -146,6 +146,8 @@ export default {
         if (this.blog.blogContent) {
           this.container = this.$showdown.makeHtml(this.blog.blogContent);
           console.log("页面已渲染");
+          this.addBlogViews(this.blog);
+
           clearInterval(interval);
         }
       }, 200);

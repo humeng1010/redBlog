@@ -126,12 +126,12 @@
               <aside class="widget widget-tag-cloud">
                 <div class="widget-title">标签</div>
                 <div class="tag-cloud">
-                  <a href="#" class="badge badge-light">php</a>
-                  <a href="#" class="badge badge-primary">苹果</a>
-                  <a href="#" class="badge badge-danger">比特币</a>
-                  <a href="#" class="badge badge-light">linux</a>
-                  <a href="#" class="badge badge-light">前端</a>
-                  <a href="#" class="badge badge-light">vue</a>
+                  <a href="#" class="badge badge-default">vue</a>
+                  <a href="#" class="badge badge-primary">ios</a>
+                  <a href="#" class="badge badge-success">java</a>
+                  <a href="#" class="badge badge-info">linux</a>
+                  <a href="#" class="badge badge-warning">macos</a>
+                  <a href="#" class="badge badge-danger">springboot</a>
                 </div>
               </aside>
             </div>
@@ -166,13 +166,10 @@ export default {
   },
   methods: {
     // 使用mapActions映射获取到$store中actions中的方法
-    ...mapActions("blogPage", ["getBlogList", "addBlogViews"]),
+    ...mapActions("blogPage", ["getBlogList"]),
     // 编程式路由跳转
     viewBlog(blogId) {
       this.$router.push({ path: `/blog/${blogId}` });
-    },
-    addViews(blog) {
-      this.addBlogViews(blog);
     },
   },
 };

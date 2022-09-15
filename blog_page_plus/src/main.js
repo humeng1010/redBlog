@@ -2,15 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 // 导入vue-router
 import router from '@/router';
-// router.afterEach((to, from, next) => {
-//   window.scrollTo(0, 0);
-// });
 // 引入Markdown语法
 import showdown from 'showdown';
 // 引入vuex仓库
 import store from './store';
 // 引入图片懒加载插件
 import VueLazyLoad from 'vue-lazyload';
+//引入bootstrap样式
+import 'bootstrap/dist/css/bootstrap.min.css';
+// 引入bootstrap js
+require('bootstrap')
 //配置懒加载属性
 Vue.use(VueLazyLoad, {
   preLoad: 1.3,

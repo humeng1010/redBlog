@@ -16,7 +16,10 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <div class="blog-hamburger">
+          <div
+            @click="isactive = !isactive"
+            :class="{ 'is-active': isactive, 'blog-hamburger': true }"
+          >
             <div class="hamburger-inner"></div>
           </div>
         </a>
@@ -83,7 +86,9 @@
 import { mapActions, mapState } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      isactive: false,
+    };
   },
   computed: {
     ...mapState("blogPage", ["user"]),
