@@ -41,18 +41,15 @@ public class BlogController {
         return Result.ok(blogService.getBaseMapper().selectById(blogId));
     }
 
+    /**
+     * 博客点击量
+     *
+     * @param blog
+     * @return
+     */
     @PutMapping("/addViews")
     public Result updateBlogViews(@RequestBody Blog blog) {
-//        log.info("传递的参数{}", blog);
-        if (blog == null) {
-            return Result.fail("blog不能为空");
-        }
-        Long blogViews = blog.getBlogViews();
-        blog.setBlogViews(blogViews + 1);
-
-        Blog blog1 = BeanUtil.copyProperties(blog, Blog.class);
-        blogService.updateById(blog1);
-        return Result.ok(blog1);
+        return blogService.addViews(blog);
     }
 
 }

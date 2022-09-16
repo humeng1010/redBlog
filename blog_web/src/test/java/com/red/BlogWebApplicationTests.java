@@ -8,10 +8,11 @@ import com.red.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -35,6 +36,19 @@ class BlogWebApplicationTests {
 //        List<User> users = userMapper.selectList(null);
         User user = userMapper.selectById(userId);
         System.out.println(user);
+    }
+
+    @Test
+    void testMessage() throws NoSuchAlgorithmException {
+        MD5 md51 = MD5.create();
+        String s = md51.digestHex16("123456");
+        byte[] digest1 = md51.digest("123456");
+        System.out.println(Arrays.toString(digest1));
+//        System.out.println(s);
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        md5.update("123456".getBytes());
+        byte[] digest = md5.digest();
+        System.out.println(Arrays.toString(digest));
     }
 
 }

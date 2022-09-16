@@ -24,7 +24,9 @@ public class Blog {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     @Version
+    @TableField(select = false)
     private Integer version;
     @TableLogic(value = "0", delval = "1")
+    @TableField(select = false)
     private Integer deleted;
 }
