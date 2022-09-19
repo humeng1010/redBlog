@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 
 // 引入路由
 import Home from '@/pages/Home';
+import Login from '@/pages/Login';
 
 
 // 使用插件
@@ -48,11 +49,21 @@ export default new VueRouter({
         {
             path: "/home",
             component: Home,
+            meta: {
+                show: true
+            }
 
         },
         {
+            path: "/login",
+            component: Login,
+            meta: {
+                show: false
+            }
+        },
+        {
             path: '*',
-            redirect: "/home"
+            redirect: "/login"
         }
 
     ]

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <AdminHeader></AdminHeader>
-    <left></left>
+    <AdminHeader v-show="$route.meta.show"></AdminHeader>
+    <left v-show="$route.meta.show"></left>
     <router-view></router-view>
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
   components: {
     Left,
     AdminHeader,
+  },
+  mounted() {
+    console.dir(this.$route);
   },
 };
 </script>

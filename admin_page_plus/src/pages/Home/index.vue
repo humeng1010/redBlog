@@ -1,5 +1,13 @@
 <template>
   <div>
+    <el-page-header @back="goBack" content="详情页面"> </el-page-header>
+    <el-carousel :interval="4000" type="card" height="200px">
+      <el-carousel-item v-for="item in images" :key="item.id">
+        <h3 class="medium">
+          <img class="img-size" :src="item.img" alt="轮播图片" />
+        </h3>
+      </el-carousel-item>
+    </el-carousel>
     {{ msg }}页
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
@@ -30,6 +38,7 @@
 <script>
 export default {
   name: "Home",
+
   data() {
     const item = {
       date: "2016-05-02",
@@ -39,10 +48,36 @@ export default {
     return {
       msg: "home",
       tableData: Array(20).fill(item),
+      images: [
+        {
+          id: 1,
+          img: "../image/room.jpg",
+        },
+        {
+          id: 2,
+          img: "../image/wallhaven-9mjoy1_2560x1600.png",
+        },
+        {
+          id: 3,
+          img: "../image/wallhaven-k7v9yq.png",
+        },
+        {
+          id: 4,
+          img: "../image/wallhaven-rdl9vw.jpeg",
+        },
+      ],
     };
+  },
+  methods: {
+    goBack() {
+      console.log("go back");
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.img-size {
+  width: 100%;
+}
 </style>
