@@ -26,7 +26,6 @@ html {
 }
 #app {
   display: flex;
-  flex-wrap: wrap;
   height: 100%;
 }
 
@@ -42,5 +41,9 @@ a {
 }
 li {
   list-style: none;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 </style>

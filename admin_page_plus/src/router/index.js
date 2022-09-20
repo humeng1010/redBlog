@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 // 引入路由
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import BlogAdmin from '@/pages/BlogAdmin';
 
 
 // 使用插件
@@ -47,18 +48,24 @@ export default new VueRouter({
     },
     routes: [
         {
+            path: "/login",
+            component: Login,
+            meta: {
+                show: false
+            }
+        },
+        {
             path: "/home",
             component: Home,
             meta: {
                 show: true
             }
-
         },
         {
-            path: "/login",
-            component: Login,
+            path: "/blog",
+            component: BlogAdmin,
             meta: {
-                show: false
+                show: true
             }
         },
         {
