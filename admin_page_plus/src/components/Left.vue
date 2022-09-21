@@ -6,6 +6,7 @@
         <div class="username">
           <el-button type="primary" size="mini" round>root 管理员</el-button>
         </div>
+        <el-button type="danger" size="mini" round>注销</el-button>
       </div>
       <router-link class="home common" to="/home">
         <i class="el-icon-s-home"></i>
@@ -16,7 +17,7 @@
         管理博客
       </router-link>
       <router-link class="common" to="/home">
-        <i class="el-icon-s-home"></i>
+        <i class="el-icon-user"></i>
         个人中心
       </router-link>
     </div>
@@ -66,14 +67,17 @@ export default {
   height: 80px;
   font-size: 26px;
   line-height: 80px;
-  background-color: #ccc;
-  border-radius: 30%;
+  /* background-color: #ccc; */
+  color: #fff;
+  /* border-radius: 50%; */
 }
 .nav .common:hover {
-  background-color: skyblue;
+  border: 1px solid skyblue;
+  /* background-color: skyblue; */
 }
 .nav .common:focus {
-  background-color: skyblue;
+  color: skyblue;
+  border: 1px solid skyblue;
 }
 .nav .home {
   margin-top: 100px;

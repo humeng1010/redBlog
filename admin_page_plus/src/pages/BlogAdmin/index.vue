@@ -9,4 +9,7 @@ export default {
 </script>
 
 <style>
+.blog-admin {
+  flex: 8;
+}
 </style>
