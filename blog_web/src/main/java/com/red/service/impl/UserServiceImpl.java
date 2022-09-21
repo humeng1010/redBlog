@@ -7,12 +7,14 @@ import com.red.controller.utils.Result;
 import com.red.entity.User;
 import com.red.mapper.UserMapper;
 import com.red.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -27,6 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result getUserById(Long userId) {
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         String cacheUser = ops.get("user:" + userId);
+        log.info("从redis中获取的用户信息为:{}", cacheUser);
         if (StrUtil.isNotBlank(cacheUser)) {
             User user = JSONUtil.toBean(cacheUser, User.class);
             return Result.ok(user);
@@ -58,7 +61,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (update) {
             //修改成功后删除redis缓存
             stringRedisTemplate.delete("user:" + user.getUserId());
-            stringRedisTemplate.opsForValue().set("user:" + user.getUserId(), JSONUtil.toJsonStr(user));
             return Result.ok("修改成功");
         }
         return Result.fail("修改失败");
