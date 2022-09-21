@@ -1,7 +1,7 @@
 <template>
   <div class="right">
-    <div class="header">123</div>
-    首页放博客列表，按照观看数降序排列，结合ECharts做数据化
+    <div class="header"></div>
+    <!-- 首页放博客列表，按照观看数降序排列，结合ECharts做数据化 -->
     <div style="width: 500px; height: 500px" ref="chart"></div>
   </div>
 </template>
