@@ -40,4 +40,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return Result.ok(user);
     }
 
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Result updateUser(User user) {
+        if (user == null) {
+            return Result.fail("用户信息不能为空");
+        }
+        if (user.getUserId() == null) {
+            return Result.fail("用户id不能为空");
+        }
+        boolean update = this.updateById(user);
+        if (update) {
+            //修改成功后删除redis缓存
+            stringRedisTemplate.delete("user:" + user.getUserId());
+            stringRedisTemplate.opsForValue().set("user:" + user.getUserId(), JSONUtil.toJsonStr(user));
+            return Result.ok("修改成功");
+        }
+        return Result.fail("修改失败");
+    }
+
 }

@@ -6,4 +6,6 @@ import com.red.entity.User;
 
 public interface UserService extends IService<User> {
     Result getUserById(Long userId);
+
+    Result updateUser(User user);
 }

@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -56,5 +53,18 @@ public class UserController {
     @GetMapping("/{userId}")
     public Result getUserById(@PathVariable Long userId) {
         return userService.getUserById(userId);
+    }
+
+
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    @PutMapping("/updateUser")
+    public Result updateUser(@RequestBody User user) {
+//        log.info("修改用户信息:{}", user);
+        return userService.updateUser(user);
     }
 }
