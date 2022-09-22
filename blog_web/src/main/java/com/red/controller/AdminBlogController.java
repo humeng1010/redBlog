@@ -18,13 +18,13 @@ public class AdminBlogController {
     private BlogService blogService;
 
     /**
-     * 查询全部
+     * 查询全部-部分字段
      *
      * @return
      */
     @GetMapping
     public Result getBlogList() {
-        return Result.ok(blogService.list());
+        return blogService.getBlogs();
     }
 
     /**

@@ -3,7 +3,10 @@ package com.red.config;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.red.common.RedisConstant;
+import com.red.common.ThreadLocals;
 import com.red.controller.utils.Result;
+import com.red.dto.UserDTO;
+import com.red.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -31,7 +34,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         //判断token是否和redis中的token一致
         String user = stringRedisTemplate.opsForValue().get(RedisConstant.BLOG_USER_TOKEN + token);
         if (StrUtil.isNotBlank(user)) {
-            log.info("用户已登录{}", user);
+            User user1 = JSONUtil.toBean(user, User.class);
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUsername(user1.getUserName());
+            userDTO.setPassword(user1.getUserPassword());
+//            BeanUtil.copyProperties(user1, userDTO);
+//            log.info("用户已登录{}", user);
+            ThreadLocals.setUser(userDTO);
+
+            log.info("用户已登录{}", ThreadLocals.getUser());
             return true;
         }
         //如果不一致，返回错误信息
