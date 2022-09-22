@@ -4,7 +4,7 @@
     <label for="username" style="color: #6cf">用户名:</label>
     <input
       class="inp"
-      v-model="user.account"
+      v-model="user.username"
       type="text"
       name="username"
       autocomplete="off"
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { loginBlog } from "@/api";
 export default {
   name: "Login",
   data() {
@@ -47,7 +48,7 @@ export default {
       isShowUserErr: false,
       isShowPwdErr: false,
       user: {
-        account: "admin",
+        username: "root",
         password: "123456",
       },
     };
@@ -73,12 +74,23 @@ export default {
   },
 
   methods: {
-    login() {
-      if (this.user.account === "admin" && this.user.password === "123456") {
-        this.$router.replace("/home");
-        this.$message.success("登陆成功");
-      } else {
-        this.$message.error("账号或密码错误");
+    // 发送登录请求
+    async login() {
+      try {
+        const res = await loginBlog(this.user);
+        if (res.success) {
+          this.$message.success("登录成功");
+          //把token存到本地
+          localStorage.setItem("token", res.data);
+          //跳转到首页
+          this.$router.replace("/home");
+        } else {
+          //弹出错误信息
+          this.$message.error(res.errorMsg);
+        }
+      } catch (error) {
+        //弹出错误信息
+        this.$message.error(error);
       }
     },
   },

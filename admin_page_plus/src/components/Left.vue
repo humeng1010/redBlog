@@ -42,11 +42,11 @@ export default {
 .left {
   flex: 2;
   height: 100%;
-  /* overflow: auto; */
-  /* width: 250px; */
-  /* background-color: #eee; */
+  overflow: auto;
   background: url("../image/room.jpg") center;
   background-size: auto 100%;
+  margin-right: 20px;
+  box-shadow: 6px 0 10px 6px rgba(0, 0, 0, 0.2);
 }
 .left .nav {
   display: flex;

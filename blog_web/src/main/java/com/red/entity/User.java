@@ -20,7 +20,7 @@ public class User {
     private Long userId;
     private String userName;
     //    不查询用户密码
-    @TableField(select = false)
+//    @TableField(select = false)
     private String userPassword;
     private String userEmail;
     private String userAvatar;

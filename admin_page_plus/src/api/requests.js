@@ -1,34 +1,36 @@
 import axios from 'axios';
+//引入router
+import router from '@/router';
 //创建axios实例
 const service = axios.create({
-    baseURL: "/api", // api的base_url
+    baseURL: "/admin", // api的base_url
     timeout: 5000 // 请求超时时间
 });
 
 // request拦截器
 service.interceptors.request.use(config => {
     // Do something before request
+    //获取token
+    const token = localStorage.getItem('token');
+    //如果token存在，每个http header都加上token
+    if (token) {
+        config.headers['Authorization'] = token;
+    }
     return config;
 }, error => {
-    console.log(error); // for debug
     Promise.reject(error);
 });
 
 // respone拦截器
 service.interceptors.response.use(
     response => {
-        /**
-         * code为非20000是抛错
-         * 可结合自己业务进行修改
-         * */
-        const res = response.data;
-        if (res.code !== 20000) {
-            return Promise.reject('error');
-        }
         return response.data;
     },
     error => {
-        console.log('err' + error);// for debug
+        //跳转到登录页面
+        if (error.response.status === 502) {
+            router.replace('/login');
+        }
         return Promise.reject(error);
     }
 );

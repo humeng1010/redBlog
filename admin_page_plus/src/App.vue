@@ -12,9 +12,7 @@ export default {
   components: {
     Left,
   },
-  mounted() {
-    console.dir(this.$route);
-  },
+  mounted() {},
 };
 </script>
 
@@ -26,7 +24,13 @@ html {
 }
 #app {
   display: flex;
+  overflow: hidden;
   height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 /* ===重设样式=== */

@@ -1,8 +1,11 @@
 package com.red.controller;
 
+import cn.hutool.core.lang.UUID;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.red.controller.utils.Result;
 import com.red.entity.User;
 import com.red.service.UserService;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -34,6 +38,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     /**
      * 获取所有用户
@@ -67,4 +72,5 @@ public class UserController {
 //        log.info("修改用户信息:{}", user);
         return userService.updateUser(user);
     }
+
 }
