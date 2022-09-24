@@ -1,15 +1,16 @@
 <template>
   <div class="right">
-    <div class="header"></div>
+    <div class="header">博客列表</div>
     <!-- 首页放博客列表，按照观看数降序排列，结合ECharts做数据化 -->
-    <!-- <div class="e-chart" ref="chart"></div> -->
+    <div class="e-chart" ref="chart"></div>
 
     <el-table :data="tableData" stripe style="width: 100%">
       <el-table-column prop="blogTitle" label="标题" width="180">
       </el-table-column>
       <el-table-column prop="blogDescription" label="描述" width="180">
       </el-table-column>
-      <el-table-column prop="blogViews" label="浏览量"> </el-table-column>
+      <el-table-column prop="blogViews" label="浏览量" sortable>
+      </el-table-column>
       <el-table-column prop="blogLikeCount" label="点赞"> </el-table-column>
       <el-table-column prop="updateTime" label="更新时间"> </el-table-column>
     </el-table>
@@ -27,14 +28,13 @@ export default {
     };
   },
   mounted() {
-    // this.initCharts();
+    this.initCharts();
     this.getBlogs();
   },
   methods: {
     async getBlogs() {
       try {
         const res = await getBlogList();
-        console.log(res);
         if (res.success) {
           this.tableData = res.data;
         } else {
@@ -68,6 +68,11 @@ export default {
         ],
       });
     },
+    sort() {
+      this.tableData.sort((a, b) => {
+        return b.blogViews - a.blogViews;
+      });
+    },
   },
 };
 </script>
@@ -84,6 +89,11 @@ export default {
 }
 .right .header {
   width: 100%;
-  background-color: pink;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #6cf;
 }
 </style>

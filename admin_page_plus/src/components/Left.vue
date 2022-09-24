@@ -6,7 +6,9 @@
         <div class="username">
           <el-button type="primary" size="mini" round>root 管理员</el-button>
         </div>
-        <el-button type="danger" size="mini" round>注销</el-button>
+        <el-button @click="logout" type="danger" size="mini" round
+          >注销</el-button
+        >
       </div>
       <router-link class="home common" to="/home">
         <i class="el-icon-s-home"></i>
@@ -16,7 +18,7 @@
         <i class="el-icon-edit"></i>
         管理博客
       </router-link>
-      <router-link class="common" to="/home">
+      <router-link class="common" to="/me">
         <i class="el-icon-user"></i>
         个人中心
       </router-link>
@@ -34,7 +36,29 @@ export default {
       leftData: Array(20).fill(iterm),
     };
   },
-  methods: {},
+  methods: {
+    logout() {
+      this.$confirm("确定要注销吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          localStorage.removeItem("token");
+          this.$message({
+            type: "success",
+            message: "注销成功!",
+          });
+          this.$router.replace("/login");
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消注销",
+          });
+        });
+    },
+  },
 };
 </script>
 

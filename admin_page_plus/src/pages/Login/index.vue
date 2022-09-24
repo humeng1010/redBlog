@@ -89,8 +89,11 @@ export default {
           this.$message.error(res.errorMsg);
         }
       } catch (error) {
-        //弹出错误信息
-        this.$message.error(error);
+        //弹出错误信息--后端服务器报错
+        // console.log(error);
+        if (error.response.status === 500) {
+          this.$message.error("服务器错误");
+        }
       }
     },
   },

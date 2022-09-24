@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import BlogAdmin from '@/pages/BlogAdmin';
+import Me from '@/pages/Me';
 
 
 // 使用插件
@@ -35,8 +36,13 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 }
 //#endregion
 
+
+
+
+
+
 // 配置路由
-export default new VueRouter({
+const router = new VueRouter({
     scrollBehavior(to, from, savedPosition) {
         // return { x: 0, y: 0, behavior: 'smooth' }
         // 如果通过浏览器的前进后退键那么还会回到原先的位置，不会回到顶部
@@ -51,21 +57,32 @@ export default new VueRouter({
             path: "/login",
             component: Login,
             meta: {
-                show: false
+                show: false,
+                title: '登录'
             }
         },
         {
             path: "/home",
             component: Home,
             meta: {
-                show: true
+                show: true,
+                title: '首页'
             }
         },
         {
             path: "/blog",
             component: BlogAdmin,
             meta: {
-                show: true
+                show: true,
+                title: '博客管理'
+            }
+        },
+        {
+            path: "/me",
+            component: Me,
+            meta: {
+                show: true,
+                title: '个人中心'
             }
         },
         {
@@ -75,3 +92,32 @@ export default new VueRouter({
 
     ]
 })
+
+// 前置守卫
+// to:要去的路由
+// from:来自哪个路由
+// next:放行
+router.beforeEach((to, from, next) => {
+    // 如果要去的是登录页，直接放行
+    if (to.path === '/login') {
+        next();
+        return;
+    }
+    // 如果要去的不是登录页，判定是否登录
+    if (!localStorage.getItem('token')) {
+        next('/login');
+        return;
+    }
+    // 如果已经登录，直接放行
+    next();
+})
+
+//全局后置守卫：初始化时执行、每次路由切换后执行
+router.afterEach((to, from) => {
+    if (to.meta.title) {
+        document.title = to.meta.title //修改网页的title
+    } else {
+        document.title = '博客管理系统'
+    }
+})
+export default router

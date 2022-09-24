@@ -43,7 +43,9 @@ public class LoginController {
         if (!user.getUserPassword().equals(password)) {
             return Result.fail("密码错误");
         }
+        //生成token
         String token = UUID.randomUUID().toString();
+        //把用户信息存放到redis中
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         //保存token到redis 七天过期
         ops.set(RedisConstant.BLOG_USER_TOKEN + token, JSONUtil.toJsonStr(user), 7, TimeUnit.DAYS);
