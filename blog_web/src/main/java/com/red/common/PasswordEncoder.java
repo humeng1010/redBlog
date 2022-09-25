@@ -6,7 +6,7 @@ import org.springframework.util.DigestUtils;
 import java.nio.charset.StandardCharsets;
 
 public class PasswordEncoder {
-    
+
     public static String encode(String password) {
         // 生成盐
         String salt = RandomUtil.randomString(20);
@@ -19,6 +19,13 @@ public class PasswordEncoder {
         return salt + "@" + DigestUtils.md5DigestAsHex((password + salt).getBytes(StandardCharsets.UTF_8));
     }
 
+    /**
+     * 验证密码
+     *
+     * @param encodedPassword 加密后的密码
+     * @param rawPassword     原始密码
+     * @return
+     */
     public static Boolean matches(String encodedPassword, String rawPassword) {
         if (encodedPassword == null || rawPassword == null) {
             return false;

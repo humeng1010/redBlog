@@ -8,4 +8,8 @@ public interface UserService extends IService<User> {
     Result getUserById(Long userId);
 
     Result updateUser(User user);
+
+    Result getUserSomeInfoById(Long userId);
+
+    Result updatePassword(User user);
 }

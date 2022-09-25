@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.red.common.PasswordEncoder;
 import com.red.common.RedisConstant;
 import com.red.controller.utils.Result;
 import com.red.dto.UserDTO;
@@ -40,7 +41,8 @@ public class LoginController {
         if (ObjectUtil.isEmpty(user)) {
             return Result.fail("用户不存在");
         }
-        if (!user.getUserPassword().equals(password)) {
+        //判断密码是否正确
+        if (!PasswordEncoder.matches(user.getUserPassword(), password)) {
             return Result.fail("密码错误");
         }
         //生成token

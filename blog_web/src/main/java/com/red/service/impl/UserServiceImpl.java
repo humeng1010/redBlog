@@ -1,9 +1,12 @@
 package com.red.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.red.common.PasswordEncoder;
 import com.red.controller.utils.Result;
+import com.red.dto.AdminUserDTO;
 import com.red.entity.User;
 import com.red.mapper.UserMapper;
 import com.red.service.UserService;
@@ -57,6 +60,50 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (user.getUserId() == null) {
             return Result.fail("用户id不能为空");
         }
+        boolean update = this.updateById(user);
+        if (update) {
+            //修改成功后删除redis缓存
+            stringRedisTemplate.delete("user:" + user.getUserId());
+            return Result.ok("修改成功");
+        }
+        return Result.fail("修改失败");
+    }
+
+    @Override
+    public Result getUserSomeInfoById(Long userId) {
+        User user = this.getById(userId);
+        if (user == null) {
+            return Result.fail("用户不存在");
+        }
+
+        AdminUserDTO adminUserDTO = BeanUtil.copyProperties(user, AdminUserDTO.class, "password", "createTime", "updateTime");
+        log.info("adminUserDTO:{}", adminUserDTO);
+        return Result.ok(adminUserDTO);
+
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Result updatePassword(User user) {
+        if (user == null) {
+            return Result.fail("用户信息不能为空");
+        }
+        if (user.getUserId() == null) {
+            return Result.fail("用户id不能为空");
+        }
+        if (StrUtil.isBlank(user.getUserPassword())) {
+            return Result.fail("密码不能为空");
+        }
+        //加密密码
+        String encodePassword = PasswordEncoder.encode(user.getUserPassword());
+        user.setUserPassword(encodePassword);
+        log.info("加密后的密码为:{}", encodePassword);
+        //修改密码
         boolean update = this.updateById(user);
         if (update) {
             //修改成功后删除redis缓存
