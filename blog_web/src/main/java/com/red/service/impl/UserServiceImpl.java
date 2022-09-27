@@ -1,6 +1,8 @@
 package com.red.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 @Slf4j
@@ -77,7 +81,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         AdminUserDTO adminUserDTO = BeanUtil.copyProperties(user, AdminUserDTO.class, "password", "createTime", "updateTime");
+        //计算年龄
+        long betweenYear = DateUtil.betweenYear(DateUtil.parse(adminUserDTO.getUserBirthday(), "yyyy-MM-dd"), DateUtil.date(), false);
+        adminUserDTO.setUserAge(String.valueOf(betweenYear));
         log.info("adminUserDTO:{}", adminUserDTO);
+
         return Result.ok(adminUserDTO);
 
     }

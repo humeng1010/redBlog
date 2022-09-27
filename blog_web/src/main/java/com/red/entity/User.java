@@ -29,6 +29,7 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
     private LocalDate userBirthday;
+    @TableField(exist = false)
     private Integer userAge;
     private String userNickname;
     private String userSignature;

@@ -29,12 +29,8 @@
 <script>
 export default {
   name: "Left",
-  props: [],
   data() {
-    const iterm = "左侧侧边栏";
-    return {
-      leftData: Array(20).fill(iterm),
-    };
+    return {};
   },
   methods: {
     logout() {
