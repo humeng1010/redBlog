@@ -1,5 +1,40 @@
 <template>
   <div class="me">
+
+<el-dialog title="个人信息" :visible.sync="dialogFormVisible">
+
+  <el-form :model="form">
+    <el-form-item label="个人昵称" :label-width="formLabelWidth">
+      <el-input v-model="form.userNickname" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="邮箱" :label-width="formLabelWidth">
+      <el-input v-model="form.userEmail" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="头像" :label-width="formLabelWidth">
+      <el-input v-model="form.userAvatar" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="生日" :label-width="formLabelWidth">
+      <el-input v-model="form.userBirthday" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="个性签名" :label-width="formLabelWidth">
+      <el-input v-model="form.userSignature" autocomplete="off"></el-input>
+    </el-form-item>
+
+    <!-- <el-form-item label="活动区域" :label-width="formLabelWidth">
+      <el-select v-model="form.region" placeholder="请选择活动区域">
+        <el-option label="区域一" value="shanghai"></el-option>
+        <el-option label="区域二" value="beijing"></el-option>
+      </el-select>
+    </el-form-item> -->
+  </el-form>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false; updateUserInfos()">确 定</el-button>
+  </div>
+</el-dialog>
+
+
     <div class="user_info">
       <div class="userNickname">
         {{ userInfo.userNickname }} <span>您好</span>
@@ -7,11 +42,12 @@
       <!-- 修改按钮 -->
       <el-button
         type="primary"
-        @click="updateUserInfos"
         size="mini"
         round
+        @click="dialogFormVisible = true"
         >修改个人信息</el-button
       >
+      
       <div class="userAvatar">
         <img :src="userInfo.userAvatar" alt="" />
       </div>
@@ -46,6 +82,18 @@ import { userInfo, updateUserInfo, updatePassword } from "@/api";
 export default {
   data() {
     return {
+      dialogFormVisible: false,
+      form: {
+        userId: "",
+        userName: "",
+        userEmail: "",
+        userAvatar: "",
+        userBirthday: "",
+        userAge: "",
+        userNickname: "",
+        userSignature: "",
+      },
+      formLabelWidth: "120px",
       userInfo: {
         userId: "",
         userName: "",
@@ -76,6 +124,9 @@ export default {
   },
   mounted() {
     this.getUserInfo();
+    this.$nextTick(() => {
+      this.form = this.userInfo;
+    });
   },
   methods: {
     async getUserInfo() {
@@ -93,7 +144,8 @@ export default {
     },
     async updateUserInfos() {
       try {
-        const res = await updateUserInfo(this.userInfo);
+        this.form.userId = this.userInfo.userId;
+        const res = await updateUserInfo(this.form);
         // console.log(res);
         if (res.success) {
           this.$message.success("修改成功");
