@@ -1,6 +1,7 @@
 <template>
   <div class="me">
 
+<!-- when update have bug is null also update -->
 <el-dialog title="个人信息" :visible.sync="dialogFormVisible">
 
   <el-form :model="form">
