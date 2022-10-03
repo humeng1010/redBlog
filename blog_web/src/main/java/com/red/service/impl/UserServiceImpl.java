@@ -2,9 +2,9 @@ package com.red.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.red.common.PasswordEncoder;
 import com.red.controller.utils.Result;
@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 @Slf4j
@@ -51,7 +49,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 修改用户信息
+     * 修改用户信息 根据有无字段修改用户信息 防止当传入的为null的也被修改
+     * userId: "",
+     * userName: "",
+     * userEmail: "",
+     * userAvatar: "",
+     * userBirthday: "",
+     * userAge: "",
+     * userNickname: "",
+     * userSignature: "",
      *
      * @param user
      * @return
@@ -64,7 +70,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (user.getUserId() == null) {
             return Result.fail("用户id不能为空");
         }
-        boolean update = this.updateById(user);
+
+        LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
+
+        updateWrapper
+                .set(StrUtil.isNotBlank(user.getUserName()), User::getUserName, user.getUserName())
+                .set(StrUtil.isNotBlank(user.getUserEmail()), User::getUserEmail, user.getUserEmail())
+                .set(StrUtil.isNotBlank(user.getUserAvatar()), User::getUserAvatar, user.getUserAvatar())
+                .set(StrUtil.isNotBlank(user.getUserBirthday().toString()), User::getUserBirthday, user.getUserBirthday())
+                .set(StrUtil.isNotBlank(user.getUserAge().toString()), User::getUserAge, user.getUserAge())
+                .set(StrUtil.isNotBlank(user.getUserNickname()), User::getUserNickname, user.getUserNickname())
+                .set(StrUtil.isNotBlank(user.getUserSignature()), User::getUserSignature, user.getUserSignature())
+                .eq(User::getUserId, user.getUserId());
+        
+        boolean update = this.update(updateWrapper);
         if (update) {
             //修改成功后删除redis缓存
             stringRedisTemplate.delete("user:" + user.getUserId());
