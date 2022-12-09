@@ -48,8 +48,8 @@ export default {
       isShowUserErr: false,
       isShowPwdErr: false,
       user: {
-        username: "root",
-        password: "123456",
+        username: "admin",
+        password: "123123",
       },
     };
   },

@@ -2,7 +2,7 @@
   <div class="right">
     <div class="header">博客列表</div>
     <!-- 首页放博客列表，按照观看数降序排列，结合ECharts做数据化 -->
-    <div class="e-chart" ref="chart"></div>
+    <!-- <div class="e-chart" ref="chart"></div> -->
 
     <el-table :data="tableData" stripe style="width: 100%">
       <el-table-column prop="blogTitle" label="标题" width="180">
@@ -28,7 +28,7 @@ export default {
     };
   },
   mounted() {
-    this.initCharts();
+    // this.initCharts();
     this.getBlogs();
   },
   methods: {

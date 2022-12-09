@@ -9,14 +9,45 @@
               <article class="blog-arc">
                 <div class="blog-arc-detail">
                   <h5 class="text-center mt-0 mb-3 pb-3 text-danger">关于</h5>
-                  <p class="text-primary">
-                    一位普通的大学生,热爱web开发,在学习了一年的时间之后利用空余时间开发出的一个个人博客,正在开发中...
+                  <p class="text-right">
+                    <span class="text-success h5"> 作者:胡猛 </span>
                     <br />
-                    本项目是一个前后端分离的项目<span class="text-muted"
-                      >(主要是为了复习前面学过的知识,所以做得存在一定的缺陷)</span
+                    <span>项目地址:</span>
+                    <br />
+                    <span>gitee:</span>
+                    <a
+                      class="text-success"
+                      href="https://gitee.com/xiaohugitee/redBlog"
+                      target="_blank"
+                      >https://gitee.com/xiaohugitee/redBlog</a
+                    >
+                    <br />
+                    <span>github:</span>
+                    <a
+                      class="text-success"
+                      href="https://www.github.com/redyouzi/redBlog"
+                      target="_blank"
+                      >https://www.github.com/redyouzi/redBlog</a
                     >
                   </p>
-                  <p class="text-primary">
+                  <p>
+                    一位普通的大学生,热爱web开发,在有学习一年的基础上,利用空余时间开发出的一个个人博客。
+
+                    <span class="text-muted small">
+                      (自己写着玩的一个小项目 存在很多不足之处)
+                    </span>
+                    <br />
+                    本项目是一个基于
+                    <span class="text-success h4"> SpringBoot </span>
+                    和
+                    <span class="text-success h4"> Vue </span>
+                    的前后端分离的项目,并且使用了一些
+                    <span class="text-success h4">设计模式</span>
+                    <br />
+                    <span class="text-muted">(属于技术学习性的项目)</span>
+                  </p>
+
+                  <p class="text-muted">
                     开发记录: <br />
                     前端: <br />
                     前端主要采用了vue框架 <br />
@@ -28,7 +59,7 @@
                     mybatis-plus 框架 <br />
                     连接mysql数据库
                   </p>
-                  <h6><strong>特别鸣谢</strong></h6>
+                  <h6><strong class="text-warning">特别鸣谢</strong></h6>
                   <ul>
                     <li>Vue</li>
                     <li>SpringBoot</li>

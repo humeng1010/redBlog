@@ -71,7 +71,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return Result.fail("用户id不能为空");
         }
 
-        LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
+        /*LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
 
         updateWrapper
                 .set(StrUtil.isNotBlank(user.getUserName()), User::getUserName, user.getUserName())
@@ -81,9 +81,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .set(StrUtil.isNotBlank(user.getUserAge().toString()), User::getUserAge, user.getUserAge())
                 .set(StrUtil.isNotBlank(user.getUserNickname()), User::getUserNickname, user.getUserNickname())
                 .set(StrUtil.isNotBlank(user.getUserSignature()), User::getUserSignature, user.getUserSignature())
-                .eq(User::getUserId, user.getUserId());
-        
-        boolean update = this.update(updateWrapper);
+                .eq(User::getUserId, user.getUserId());*/
+
+        boolean update = this.updateById(user);
         if (update) {
             //修改成功后删除redis缓存
             stringRedisTemplate.delete("user:" + user.getUserId());

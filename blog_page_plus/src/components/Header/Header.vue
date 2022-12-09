@@ -31,6 +31,7 @@
               <img
                 class="profile-image mb-3 rounded-circle mx-auto"
                 :src="user.userAvatar"
+                src="../../images/avatar.png"
                 width="120"
                 height="120"
                 alt="redyouzi"
@@ -118,6 +119,7 @@ export default {
   background-size: cover;
   background-position: center center;
   color: #fff;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
 }
 .blog-header-container {
   height: 100%;
